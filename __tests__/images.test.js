@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const Image = require('../lib/models/Image');
 
 jest.mock('../lib/utils/github.js');
 
@@ -127,7 +128,6 @@ describe('pixl2-backend routes', () => {
       userId: '2',
       isPublic: false,
       isApproved: null,
-      createdAt: expect.any(String),
     };
 
     const res = await agent.post('/api/v1/images').send(expected);
@@ -250,7 +250,6 @@ describe('pixl2-backend routes', () => {
         userId: '1',
         isPublic: false,
         isApproved: null,
-        createdAt: expect.any(String),
       },
     ];
 
