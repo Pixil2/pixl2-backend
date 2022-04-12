@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const Profile = require('../lib/models/Profile');
 
 jest.mock('../lib/utils/github.js');
 
@@ -28,5 +29,14 @@ describe('pixl2 backend routes', () => {
 
     res = await agent.post('/api/v1/profiles').send(expected);
     expect(res.body).toEqual(expected);
+  });
+
+  it('should find a profile by id', async () => {
+    const agent = request.agent(app);
+    await agent.get('/api/v1/users/login/callback?code=42').redirects(1);
+    const expected = await Profile.findById(1);
+    const res = await agent.get(`/api/v1/profiles/${expected.userId}`);
+
+    expect(res.body).toEqual({ ...expected });
   });
 });

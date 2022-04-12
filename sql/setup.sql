@@ -34,9 +34,9 @@ VALUES
     ('whatever');
 
 INSERT INTO 
-    profiles (theme)
+    profiles (theme, user_id)
 VALUES 
-    ('rainbow or something');
+    ('rainbow or something', 1);
 
 INSERT INTO
     images (title, height, width, color_array)
