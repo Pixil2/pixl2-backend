@@ -3,6 +3,8 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
+jest.mock('../lib/utils/github.js');
+
 describe('pixl2 backend routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -17,7 +19,7 @@ describe('pixl2 backend routes', () => {
     const expected = {
       id: expect.any(String),
       theme: 'dark',
-      userId: expect.any(String),
+      userId: '1',
     };
     let res = await agent.post('/api/v1/profiles').send(expected);
     expect(res.status).toEqual(401);
