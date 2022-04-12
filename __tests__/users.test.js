@@ -3,6 +3,8 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
+jest.mock('../lib/utils/github.js');
+
 describe('pixl2-backend routes', () => {
   beforeEach(() => {
     return setup(pool);
