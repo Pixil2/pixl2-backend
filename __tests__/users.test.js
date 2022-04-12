@@ -30,4 +30,14 @@ describe('pixl2-backend routes', () => {
 
     expect(req.req.path).toEqual('/api/v1/profile');
   });
+
+  it('DELETE route logs out user', async () => {
+    const agent = request.agent(app);
+    const res = await agent.delete('/api/v1/users/sessions');
+
+    expect(res.body).toEqual({
+      success: true,
+      message: 'Signed out successfully!',
+    });
+  });
 });
