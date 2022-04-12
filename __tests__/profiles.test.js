@@ -39,4 +39,20 @@ describe('pixl2 backend routes', () => {
 
     expect(res.body).toEqual({ ...expected });
   });
+
+  it('should update profile', async () => {
+    const agent = request.agent(app);
+    await agent.get('/api/v1/users/login/callback?code=42').redirects(1);
+    await Profile.findById(1);
+    const expected = {
+      id: expect.any(String),
+      theme: 'light',
+      userId: '1',
+    };
+    const res = await agent
+      .patch('/api/v1/profiles/1')
+      .send({ theme: 'light' });
+
+    expect(res.body).toEqual(expected);
+  });
 });
