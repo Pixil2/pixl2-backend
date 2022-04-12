@@ -135,7 +135,7 @@ describe('pixl2-backend routes', () => {
     expect(res.body).toEqual(expected);
   });
 
-  it.only('should get all user images', async () => {
+  it('should get all user images', async () => {
     const agent = request.agent(app);
     await agent.get('/api/v1/users/login/callback?code=42').redirects(1);
     const expected = await Image.getUserImages(1);
@@ -151,7 +151,7 @@ describe('pixl2-backend routes', () => {
     const expected = await Image.findById(1);
     const res = await agent.get(`/api/v1/images/${expected.id}`);
 
-    expect(res.body).toEqual([{ ...expected }]);
+    expect(res.body).toEqual({ ...expected });
   });
 
   it('should update an image', async () => {
