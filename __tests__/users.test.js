@@ -19,4 +19,13 @@ describe('pixl2-backend routes', () => {
       /https:\/\/github.com\/login\/oauth\/authorize\?client_id=[\w\d]+&scope=user&redirect_uri=http:\/\/localhost:7890\/api\/v1\/users\/login\/callback/i
     );
   });
+
+  it('should login and redirect users to /api/v1/profile', async () => {
+    const req = await request
+      .agent(app)
+      .get('/api/v1/users/login/callback?code=42')
+      .redirects(1);
+
+    expect(req.req.path).toEqual('/api/v1/profile');
+  });
 });
