@@ -6,6 +6,9 @@ const Tag = require('../lib/models/Tag');
 
 jest.mock('../lib/utils/github.js');
 
+//get all
+//get by id
+
 describe('pixl2 backend routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -13,5 +16,12 @@ describe('pixl2 backend routes', () => {
 
   afterAll(() => {
     pool.end();
+  });
+
+  it('should get a list of all tags', async () => {
+    const expected = await Tag.getAllTags();
+    const res = await request(app).get('/api/v1/tags');
+
+    expect(res.body).toEqual(expected);
   });
 });

@@ -41,7 +41,10 @@ VALUES
 INSERT INTO 
     tags (name)
 VALUES 
-    ('animals');
+    ('animals'),
+    ('nature'),
+    ('geometric'),
+    ('nicolas cage');
 
 INSERT INTO
     images (title, height, width, color_array, user_id)
