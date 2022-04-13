@@ -867,9 +867,7 @@ describe('pixl2-backend routes', () => {
 
     const allImages = await Image.getAllImages();
 
-    // const res = await Image.getCount();
     const res = await agent.get('/api/v1/images/count');
-    console.log('res.text', res.text);
 
     expect(Number(res.text)).toEqual(allImages.length);
   });
