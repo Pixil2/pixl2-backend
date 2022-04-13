@@ -174,4 +174,15 @@ describe('pixl2-backend routes', () => {
     const res = await agent.delete(`/api/v1/images/1`);
     expect(res.body).toEqual(expected);
   });
+
+  it('should get tags by image id', async () => {
+    const agent = request.agent(app);
+    await agent.get('/api/v1/users/login/callback?code=42').redirects(1);
+
+    const image = await Image.findById(1);
+    const expected = await image.findTagByImage();
+
+    const res = await agent.get('/api/v1/images/1/tags');
+    expect(res.body).toEqual(expected);
+  });
 });
