@@ -10,10 +10,9 @@ CREATE TABLE users (
   avatar TEXT
 );
 
-CREATE TABLE profiles (
+CREATE TABLE tags (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  theme TEXT NOT NULL,
-  user_id BIGINT REFERENCES users(id)
+  name TEXT NOT NULL
 );
 
 CREATE TABLE images (
@@ -28,15 +27,21 @@ CREATE TABLE images (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP 
 );
 
+CREATE TABLE tags_images (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  tag_id BIGINT REFERENCES tags(id),
+  image_id BIGINT REFERENCES images(id)
+);
+
 INSERT INTO 
     users (username)
 VALUES 
     ('whatever');
 
 INSERT INTO 
-    profiles (theme, user_id)
+    tags (name)
 VALUES 
-    ('rainbow or something', 1);
+    ('animals');
 
 INSERT INTO
     images (title, height, width, color_array, user_id)
@@ -143,3 +148,8 @@ VALUES
     'rgb(0, 0, 0)',
     'rgb(0, 0, 0)'], 1
     );
+
+INSERT INTO 
+    tags_images (tag_id, image_id)
+VALUES 
+    (1, 1);
