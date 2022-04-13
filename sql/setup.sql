@@ -24,8 +24,7 @@ CREATE TABLE images (
   color_array TEXT[] NOT NULL,
   user_id BIGINT REFERENCES users(id),
   is_public BOOLEAN DEFAULT FALSE,
-  is_approved BOOLEAN,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP 
+  is_approved BOOLEAN
 );
 
 CREATE TABLE tags_images (
