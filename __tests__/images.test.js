@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const Image = require('../lib/models/Image');
 
 jest.mock('../lib/utils/github.js');
 
@@ -746,5 +747,130 @@ describe('pixl2-backend routes', () => {
     const res = await agent.post('/api/v1/images/1/tags/1');
 
     expect(res.body).toEqual(expected);
+  });
+
+  it('gets a count of all images', async () => {
+    const agent = request.agent(app);
+    await agent.get('/api/v1/users/login/callback?code=42').redirects(1);
+    const image = {
+      id: expect.any(String),
+      title: 'A title',
+      height: 10,
+      width: 10,
+      colorArray: [
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(215, 215, 215)',
+        'rgb(243, 243, 244)',
+        'rgb(216, 216, 217)',
+        'rgb(243, 243, 244)',
+        'rgb(216, 216, 217)',
+        'rgb(243, 243, 244)',
+        'rgb(216, 216, 217)',
+        'rgb(243, 243, 244)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(243, 243, 244)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(216, 216, 217)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(216, 216, 217)',
+        'rgb(0, 0, 0)',
+        'rgb(216, 216, 217)',
+        'rgb(243, 243, 244)',
+        'rgb(216, 216, 217)',
+        'rgb(243, 243, 244)',
+        'rgb(0, 0, 0)',
+        'rgb(243, 243, 244)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(243, 243, 244)',
+        'rgb(0, 0, 0)',
+        'rgb(243, 243, 244)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(216, 216, 217)',
+        'rgb(0, 0, 0)',
+        'rgb(216, 216, 217)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(216, 216, 217)',
+        'rgb(0, 0, 0)',
+        'rgb(216, 216, 217)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(243, 243, 244)',
+        'rgb(0, 0, 0)',
+        'rgb(243, 243, 244)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(243, 243, 244)',
+        'rgb(0, 0, 0)',
+        'rgb(243, 243, 244)',
+        'rgb(216, 216, 217)',
+        'rgb(243, 243, 244)',
+        'rgb(216, 216, 217)',
+        'rgb(0, 0, 0)',
+        'rgb(216, 216, 217)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(216, 216, 217)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(243, 243, 244)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(243, 243, 244)',
+        'rgb(216, 216, 217)',
+        'rgb(243, 243, 244)',
+        'rgb(216, 216, 217)',
+        'rgb(243, 243, 244)',
+        'rgb(216, 216, 217)',
+        'rgb(243, 243, 244)',
+        'rgb(216, 216, 217)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+        'rgb(0, 0, 0)',
+      ],
+      userId: '2',
+      isPublic: false,
+      isApproved: null,
+    };
+    await agent.post('/api/v1/images').send(image);
+
+    const allImages = await Image.getAllImages();
+
+    // const res = await Image.getCount();
+    const res = await agent.get('/api/v1/images/count');
+    console.log('res.text', res.text);
+
+    expect(Number(res.text)).toEqual(allImages.length);
   });
 });
