@@ -3,6 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Image = require('../lib/models/Image');
+const Tag = require('../lib/models/Tag');
 
 jest.mock('../lib/utils/github.js');
 
@@ -140,7 +141,7 @@ describe('pixl2-backend routes', () => {
     await agent.get('/api/v1/users/login/callback?code=42').redirects(1);
     const expected = await Image.getUserImages(1);
 
-    const res = await agent.get(`/api/v1/images/user/1`);
+    const res = await agent.get('/api/v1/images/user/1');
 
     expect(res.body).toEqual(expected);
   });
@@ -159,7 +160,7 @@ describe('pixl2-backend routes', () => {
     await agent.get('/api/v1/users/login/callback?code=42').redirects(1);
 
     const res = await agent
-      .patch(`/api/v1/images/1`)
+      .patch('/api/v1/images/1')
       .send({ title: 'whatever' });
     const expected = await Image.findById(1);
 
@@ -171,7 +172,7 @@ describe('pixl2-backend routes', () => {
     await agent.get('/api/v1/users/login/callback?code=42').redirects(1);
 
     const expected = await Image.findById(1);
-    const res = await agent.delete(`/api/v1/images/1`);
+    const res = await agent.delete('/api/v1/images/1');
     expect(res.body).toEqual(expected);
   });
 
@@ -186,122 +187,13 @@ describe('pixl2-backend routes', () => {
     expect(res.body).toEqual(expected);
   });
 
-  it('should be able to add a tag to an image', async () => {
+  it('should create tags_images table entry', async () => {
     const agent = request.agent(app);
     await agent.get('/api/v1/users/login/callback?code=42').redirects(1);
-    const expected = {
-      id: '1',
-      title: 'title',
-      height: 10,
-      width: 10,
-      colorArray: [
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(216, 216, 217)',
-        'rgb(243, 243, 244)',
-        'rgb(216, 216, 217)',
-        'rgb(243, 243, 244)',
-        'rgb(216, 216, 217)',
-        'rgb(243, 243, 244)',
-        'rgb(216, 216, 217)',
-        'rgb(243, 243, 244)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(243, 243, 244)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(216, 216, 217)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(216, 216, 217)',
-        'rgb(0, 0, 0)',
-        'rgb(216, 216, 217)',
-        'rgb(243, 243, 244)',
-        'rgb(216, 216, 217)',
-        'rgb(243, 243, 244)',
-        'rgb(0, 0, 0)',
-        'rgb(243, 243, 244)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(243, 243, 244)',
-        'rgb(0, 0, 0)',
-        'rgb(243, 243, 244)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(216, 216, 217)',
-        'rgb(0, 0, 0)',
-        'rgb(216, 216, 217)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(216, 216, 217)',
-        'rgb(0, 0, 0)',
-        'rgb(216, 216, 217)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(243, 243, 244)',
-        'rgb(0, 0, 0)',
-        'rgb(243, 243, 244)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(243, 243, 244)',
-        'rgb(0, 0, 0)',
-        'rgb(243, 243, 244)',
-        'rgb(216, 216, 217)',
-        'rgb(243, 243, 244)',
-        'rgb(216, 216, 217)',
-        'rgb(0, 0, 0)',
-        'rgb(216, 216, 217)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(216, 216, 217)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(243, 243, 244)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(243, 243, 244)',
-        'rgb(216, 216, 217)',
-        'rgb(243, 243, 244)',
-        'rgb(216, 216, 217)',
-        'rgb(243, 243, 244)',
-        'rgb(216, 216, 217)',
-        'rgb(243, 243, 244)',
-        'rgb(216, 216, 217)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-        'rgb(0, 0, 0)',
-      ],
-      userId: '1',
-      isPublic: false,
-      isApproved: null,
-      tags: [{ id: '1', name: 'animals', tag_id: '1', image_id: '1' }],
-    };
+    const expected = { tag_id: '1', image_id: '1' };
     const res = await agent.post('/api/v1/images/1/tags/1');
+    // console.log('tagsImages.body', tagsImages.body);
+    // const res = await Tag.getTagById(tagsImages.body.tag_id);
 
     expect(res.body).toEqual(expected);
   });

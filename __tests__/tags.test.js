@@ -31,7 +31,7 @@ describe('pixl2 backend routes', () => {
     expect(res.body).toEqual(expected);
   });
 
-  it('should images by tag id', async () => {
+  it('should get images by tag id', async () => {
     const tag = await Tag.getTagById(1);
     const expected = await tag.getImagesByTag();
     const res = await request(app).get('/api/v1/tags/1/images');
