@@ -1,8 +1,9 @@
 -- Use this file to define your SQL tables
 -- The SQL in this file will be executed when you run `npm run setup-db`
 DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS profiles CASCADE;
+DROP TABLE IF EXISTS tags CASCADE;
 DROP TABLE IF EXISTS images CASCADE;
+DROP TABLE IF EXISTS tags_images CASCADE;
 
 CREATE TABLE users (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -28,7 +29,6 @@ CREATE TABLE images (
 );
 
 CREATE TABLE tags_images (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   tag_id BIGINT REFERENCES tags(id),
   image_id BIGINT REFERENCES images(id)
 );
