@@ -28,7 +28,7 @@ describe('pixl2-backend routes', () => {
       .get('/api/v1/users/login/callback?code=42')
       .redirects(1);
 
-    expect(req.req.path).toEqual('/api/v1/images');
+    expect(req.req.path).toEqual('/canvas');
   });
 
   it('DELETE route logs out user', async () => {
