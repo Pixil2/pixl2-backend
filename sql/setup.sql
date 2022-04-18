@@ -40,10 +40,20 @@ VALUES
 INSERT INTO 
     tags (name)
 VALUES 
-    ('animals'),
-    ('nature'),
-    ('geometric'),
-    ('nicolas cage');
+    ('Animals'),
+    ('Nature'),
+    ('Shapes'),
+    ('Nicolas Cage'),
+    ('People'), 
+    ('Patterns'),
+    ('Vehicles'),
+    ('Colorful'),
+    ('Plants'),
+    ('Food'),
+    ('Sports'),
+    ('Music'),
+    ('Fine Art'),
+    ('Other');
 
 INSERT INTO
     images (title, height, width, color_array, user_id)
