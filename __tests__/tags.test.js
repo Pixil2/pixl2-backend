@@ -32,6 +32,7 @@ describe('pixl2 backend routes', () => {
       { id: '12', name: 'Music' },
       { id: '13', name: 'Fine Art' },
       { id: '14', name: 'Other' },
+      { id: '15', name: 'Unselected' },
     ];
 
     const res = await request(app).get('/api/v1/tags');

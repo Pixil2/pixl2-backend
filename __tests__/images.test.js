@@ -609,7 +609,7 @@ describe('pixl2-backend routes', () => {
       title: 'title',
       height: 10,
       width: 10,
-      colorArray: [
+      color_array: [
         'rgb(0, 0, 0)',
         'rgb(0, 0, 0)',
         'rgb(0, 0, 0)',
@@ -711,9 +711,9 @@ describe('pixl2-backend routes', () => {
         'rgb(0, 0, 0)',
         'rgb(0, 0, 0)',
       ],
-      userId: '1',
-      isPublic: false,
-      isApproved: null,
+      user_id: '1',
+      is_public: false,
+      is_approved: null,
     };
 
     const res = await agent.delete('/api/v1/images/1');

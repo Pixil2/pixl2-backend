@@ -40,7 +40,6 @@ VALUES
 INSERT INTO 
     tags (name)
 VALUES 
-    ('Unselected'),
     ('Animals'),
     ('Nature'),
     ('Shapes'),
@@ -54,7 +53,8 @@ VALUES
     ('Sports'),
     ('Music'),
     ('Fine Art'),
-    ('Other');
+    ('Other'),
+    ('Unselected');
 
 INSERT INTO
     images (title, height, width, color_array, user_id)
