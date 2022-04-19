@@ -40,6 +40,7 @@ VALUES
 INSERT INTO 
     tags (name)
 VALUES 
+    ('Unselected'),
     ('Animals'),
     ('Nature'),
     ('Shapes'),
