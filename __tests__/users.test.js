@@ -22,13 +22,13 @@ describe('pixl2-backend routes', () => {
     );
   });
 
-  it('should login and redirect users to /api/v1/images', async () => {
+  it('should login and redirect users to /profile', async () => {
     const req = await request
       .agent(app)
       .get('/api/v1/users/login/callback?code=42')
       .redirects(1);
 
-    expect(req.req.path).toEqual('/canvas');
+    expect(req.req.path).toEqual('/profile');
   });
 
   it('DELETE route logs out user', async () => {
