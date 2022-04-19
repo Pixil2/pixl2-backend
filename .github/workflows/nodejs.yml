@@ -24,3 +24,4 @@ jobs:
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           REDIRECT_URI: http://localhost:7890/api/v1/users/login/callback
           LOCAL_REDIRECT: http://localhost:7891
+          NODE_ENV: 'test'
