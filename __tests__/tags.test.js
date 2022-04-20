@@ -18,10 +18,21 @@ describe('pixl2 backend routes', () => {
 
   it('should get a list of all tags', async () => {
     const expected = [
-      { id: '1', name: 'animals' },
-      { id: '2', name: 'nature' },
-      { id: '3', name: 'geometric' },
-      { id: '4', name: 'nicolas cage' },
+      { id: '1', name: 'Animals' },
+      { id: '2', name: 'Nature' },
+      { id: '3', name: 'Shapes' },
+      { id: '4', name: 'Nicolas Cage' },
+      { id: '5', name: 'People' },
+      { id: '6', name: 'Patterns' },
+      { id: '7', name: 'Vehicles' },
+      { id: '8', name: 'Colorful' },
+      { id: '9', name: 'Plants' },
+      { id: '10', name: 'Food' },
+      { id: '11', name: 'Sports' },
+      { id: '12', name: 'Music' },
+      { id: '13', name: 'Fine Art' },
+      { id: '14', name: 'Other' },
+      { id: '15', name: 'Unselected' },
     ];
 
     const res = await request(app).get('/api/v1/tags');
@@ -30,7 +41,7 @@ describe('pixl2 backend routes', () => {
   });
 
   it('should get a tag by id', async () => {
-    const expected = { id: '1', name: 'animals' };
+    const expected = { id: '1', name: 'Animals' };
 
     const res = await request(app).get(`/api/v1/tags/${expected.id}`);
 
@@ -40,7 +51,7 @@ describe('pixl2 backend routes', () => {
   it('should get images by tag id', async () => {
     const expected = {
       id: '1',
-      name: 'animals',
+      name: 'Animals',
       images: [
         {
           id: '1',
