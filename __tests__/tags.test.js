@@ -5,8 +5,6 @@ const app = require('../lib/app');
 
 jest.mock('../lib/utils/github.js');
 
-//get by id
-
 describe('pixl2 backend routes', () => {
   beforeEach(() => {
     return setup(pool);
