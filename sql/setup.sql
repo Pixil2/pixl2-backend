@@ -59,7 +59,7 @@ VALUES
 INSERT INTO
     images (title, height, width, color_array, user_id)
 VALUES
-    ('title', 10, 10, 
+    ('Black Squares', 10, 10, 
      ARRAY ['rgb(0, 0, 0)',
     'rgb(0, 0, 0)',
     'rgb(0, 0, 0)',

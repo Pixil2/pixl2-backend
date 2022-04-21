@@ -141,7 +141,7 @@ describe('pixl2-backend routes', () => {
     const expected = [
       {
         id: '1',
-        title: 'title',
+        title: 'Black Squares',
         height: 10,
         width: 10,
         colorArray: [
@@ -262,7 +262,7 @@ describe('pixl2-backend routes', () => {
     await agent.get('/api/v1/users/login/callback?code=42').redirects(1);
     const expected = {
       id: '1',
-      title: 'title',
+      title: 'Black Squares',
       height: 10,
       width: 10,
       colorArray: [
@@ -487,7 +487,7 @@ describe('pixl2-backend routes', () => {
     });
     const expected = {
       id: '1',
-      title: 'title',
+      title: 'Black Squares',
       height: 10,
       width: 10,
       colorArray: [
@@ -606,7 +606,7 @@ describe('pixl2-backend routes', () => {
 
     const expected = {
       id: '1',
-      title: 'title',
+      title: 'Black Squares',
       height: 10,
       width: 10,
       color_array: [
@@ -726,7 +726,7 @@ describe('pixl2-backend routes', () => {
 
     const expected = {
       id: '1',
-      title: 'title',
+      title: 'Black Squares',
       height: 10,
       width: 10,
       colorArray: [

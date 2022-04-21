@@ -55,7 +55,7 @@ describe('pixl2 backend routes', () => {
       images: [
         {
           id: '1',
-          title: 'title',
+          title: 'Black Squares',
           height: 10,
           width: 10,
           color_array: [
