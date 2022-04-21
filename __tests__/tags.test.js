@@ -5,8 +5,6 @@ const app = require('../lib/app');
 
 jest.mock('../lib/utils/github.js');
 
-//get by id
-
 describe('pixl2 backend routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -55,7 +53,7 @@ describe('pixl2 backend routes', () => {
       images: [
         {
           id: '1',
-          title: 'title',
+          title: 'Black Squares',
           height: 10,
           width: 10,
           color_array: [
